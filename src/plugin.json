@@ -1,0 +1,20 @@
+{
+  "type": "panel",
+  "name": "Cisco Topology Plugin",
+  "id": "cisco-topology-plugin",
+  "info": {
+    "description": "Plugin to draw network topologies.",
+    "logos": {
+      "small": "img/logo.png",
+      "large": "img/logo.png"
+    },
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "6.x.x",
+    "@types/vis": "4.21.19",
+    "react-graph-vis": "1.0.5",
+    "plugins": []
+  }
+}

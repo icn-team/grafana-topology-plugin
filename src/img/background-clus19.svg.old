@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="161.82677mm"
+   height="122.16945mm"
+   viewBox="0 0 161.82677 122.16945"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="background-clus19.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.7498919"
+     inkscape:cx="100.65884"
+     inkscape:cy="230.8714"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1015"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       originx="-42.068757"
+       originy="-68.59513" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-42.068756,-106.23542)">
+    <rect
+       style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:0.5138815;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817"
+       width="111.125"
+       height="74.083336"
+       x="44.979164"
+       y="109.14584" />
+    <rect
+       style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:0.31717452;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-3"
+       width="42.333328"
+       height="74.083328"
+       x="158.75"
+       y="109.14584" />
+    <rect
+       style="opacity:1;fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.37612271;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-6"
+       width="111.12502"
+       height="39.6875"
+       x="44.979164"
+       y="185.875" />
+    <rect
+       style="opacity:1;fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.23214796;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect817-6-7"
+       width="42.333328"
+       height="39.687504"
+       x="158.75"
+       y="185.875" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="46.49107"
+       y="115.57145"
+       id="text866"><tspan
+         sodipodi:role="line"
+         id="tspan864"
+         x="46.49107"
+         y="115.57145"
+         style="font-size:4.93888903px;fill:#666666;stroke-width:0.26458332;">ENTERPRISE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="160.60204"
+       y="115.26924"
+       id="text866-5"><tspan
+         sodipodi:role="line"
+         id="tspan864-3"
+         x="160.60204"
+         y="115.26924"
+         style="font-size:4.93888903px;fill:#666666;stroke-width:0.26458332;">PRIVATE CLOUD</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="47.54961"
+       y="191.92264"
+       id="text866-56"><tspan
+         sodipodi:role="line"
+         id="tspan864-2"
+         x="47.54961"
+         y="191.92264"
+         style="font-size:4.93888903px;fill:#666666;fill-opacity:1;stroke-width:0.26458332;">PUBLIC ISP</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="160.2619"
+       y="191.92264"
+       id="text866-5-9"><tspan
+         sodipodi:role="line"
+         id="tspan864-3-1"
+         x="160.2619"
+         y="191.92264"
+         style="font-size:4.93888903px;fill:#666666;stroke-width:0.26458332;fill-opacity:1;">PUBLIC CLOUD</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "name": "cisco-topology-plugin",
+  "version": "1.0.0",
+  "description": "Plugin to draw network topologies.",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "msardara@cisco.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "v6.5.3",
+    "@grafana/toolkit": "v6.5.3",
+    "@grafana/ui": "v6.5.3",
+    "react-graph-vis": "^1.0.5"
+  },
+  "dependencies": {}
+}
