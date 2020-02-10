@@ -10,7 +10,7 @@ import { scaleLinear } from 'd3';
 // Vis js
 import Graph from 'react-graph-vis';
 
-interface Props extends PanelProps<TopologyOptions> {}
+interface Props extends PanelProps<TopologyOptions> { }
 
 interface State {
   graph: any;
@@ -24,7 +24,6 @@ class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
 
   static getDerivedStateFromError(error) {
     // Update state so the next render will show the fallback UI.
-    console.log('Nooo');
     return { hasError: true };
   }
 
@@ -46,6 +45,7 @@ export class TopologyPanel extends PureComponent<Props, State> {
   colorScaleLin: any;
   colorScaleLog: any;
   style: CSSProperties = {};
+  labels: Map<string, string>;
 
   constructor(props: Props) {
     super(props);
@@ -53,6 +53,8 @@ export class TopologyPanel extends PureComponent<Props, State> {
     this.state = {
       graph: { nodes: [], edges: [] },
     };
+
+    this.labels = new Map<string, string>();
 
     this.updateBackground(props.options.backgroundImage);
 
@@ -80,6 +82,19 @@ export class TopologyPanel extends PureComponent<Props, State> {
     this.updateTopology();
   }
 
+  // printLabels(canvas: CanvasRenderingContext2D) {
+  //   if (this.network) {
+  //     Object.keys(this.network.body.nodes).forEach(key => {
+  //       const label = this.labels.get(key);
+  //       if (label !== undefined) {
+  //         const nodePosition = this.network.getPositions(key);
+  //         canvas.fillStyle = 'white';
+  //         canvas.fillText(label, -canvas.measureText(label).width - 60, nodePosition[key].y + 40);
+  //       }
+  //     });
+  //   }
+  // }
+
   componentDidUpdate(prevProps: Props) {
     // Since any change could be referenced in a template variable,
     // This needs to process everytime (with debounce)
@@ -97,6 +112,7 @@ export class TopologyPanel extends PureComponent<Props, State> {
     }
 
     const bandwidth = new Map<string, number>();
+    this.labels = new Map<string, string>();
 
     if (data.series.length < 1) {
       console.log('No available data....');
@@ -104,11 +120,23 @@ export class TopologyPanel extends PureComponent<Props, State> {
       data.series.forEach(element => {
         const name: string = element.fields[0].name;
         const length: number = element.fields[0].values.length;
-        let linkBw = bandwidth.get(name);
-        if (linkBw === undefined) {
-          linkBw = 0;
+
+        const index: number = name.indexOf('$');
+        if (index >= 0) {
+          const node: string = name.substring(0, index);
+          let label: string = name.substring(index + 1);
+
+          label += ' ' + element.fields[0].values.get(length - 1);
+
+          this.labels.set(node, label);
+        } else {
+          let linkBw = bandwidth.get(name);
+          if (linkBw === undefined) {
+            linkBw = 0;
+          }
+
+          bandwidth.set(name, linkBw + element.fields[0].values.get(length - 1));
         }
-        bandwidth.set(name, linkBw + element.fields[0].values.get(length - 1));
       });
 
       Object.keys(this.network.body.edges).forEach(key => {
@@ -183,7 +211,7 @@ export class TopologyPanel extends PureComponent<Props, State> {
     const { graph } = this.state;
 
     const events = {
-      select: event => {},
+      select: event => { },
     };
 
     return (
@@ -195,6 +223,17 @@ export class TopologyPanel extends PureComponent<Props, State> {
             events={events}
             getNetwork={nw => {
               this.network = nw;
+              this.network.on('beforeDrawing', canvas => {
+                Object.keys(this.network.body.nodes).forEach(key => {
+                  const label = this.labels.get(key);
+                  if (label !== undefined) {
+                    const nodePosition = this.network.getPositions(key);
+                    canvas.fillStyle = 'white';
+                    canvas.font = '30px Verdana';
+                    canvas.fillText(label, nodePosition[key].x - canvas.measureText(label).width - 60, nodePosition[key].y + 60);
+                  }
+                });
+              });
             }}
           />
         </ErrorBoundary>
