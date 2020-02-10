@@ -78,6 +78,48 @@ export class TopologyPanel extends PureComponent<Props, State> {
     };
   }
 
+  updateLabels(canvas: CanvasRenderingContext2D) {
+    Object.keys(this.network.body.nodes).forEach(key => {
+      const { labelSize, labelFont, labelPosition, labelColor } = this.props.options;
+
+      const label = this.labels.get(key);
+      if (label !== undefined) {
+        const nodePosition = this.network.getPositions(key);
+        canvas.fillStyle = labelColor;
+        canvas.font = labelSize + 'px ' + labelFont;
+        const res = canvas.font.match('/d+/');
+        let textHeight = 0;
+        if (res !== null) {
+          textHeight = parseInt(res.entries[0], 10);
+        }
+        const textWidth = canvas.measureText(label).width;
+        const pos: [number, number] = [0, 0];
+        switch (labelPosition) {
+          case 'Top':
+            pos[0] = 0;
+            pos[1] = -1;
+            break;
+          case 'Bottom':
+            pos[0] = 0;
+            pos[1] = 1;
+            break;
+          case 'Right':
+            pos[0] = 1;
+            pos[1] = 0;
+            break;
+          case 'Left':
+            pos[0] = -1;
+            pos[1] = 0;
+            break;
+        }
+
+        const x: number = nodePosition[key].x - textWidth / 2;
+        const y: number = nodePosition[key].y + textHeight / 2;
+        canvas.fillText(label, x + pos[0] * (textWidth / 2 + 60), y + pos[1] * (textHeight + 80));
+      }
+    });
+  }
+
   componentDidMount() {
     this.updateTopology();
   }
@@ -209,43 +251,7 @@ export class TopologyPanel extends PureComponent<Props, State> {
             events={events}
             getNetwork={nw => {
               this.network = nw;
-              this.network.on('beforeDrawing', canvas => {
-                Object.keys(this.network.body.nodes).forEach(key => {
-                  const { labelSize, labelFont, labelPosition } = this.props.options;
-
-                  const label = this.labels.get(key);
-                  if (label !== undefined) {
-                    const nodePosition = this.network.getPositions(key);
-                    canvas.fillStyle = 'white';
-                    canvas.font = labelSize + 'px ' + labelFont;
-                    const textHeight: number = parseInt(canvas.font.match(/\d+/), 10);
-                    const textWidth = canvas.measureText(label).width;
-                    const pos: [number, number] = [0, 0];
-                    switch (labelPosition) {
-                      case 'Top':
-                        pos[0] = 0;
-                        pos[1] = -1;
-                        break;
-                      case 'Bottom':
-                        pos[0] = 0;
-                        pos[1] = 1;
-                        break;
-                      case 'Right':
-                        pos[0] = 1;
-                        pos[1] = 0;
-                        break;
-                      case 'Left':
-                        pos[0] = -1;
-                        pos[1] = 0;
-                        break;
-                    }
-
-                    const x: number = nodePosition[key].x - textWidth / 2;
-                    const y: number = nodePosition[key].y + textHeight / 2;
-                    canvas.fillText(label, x + pos[0] * (textWidth / 2 + 60), y + pos[1] * (textHeight + 40));
-                  }
-                });
-              });
+              this.network.on('beforeDrawing', this.updateLabels.bind(this));
             }}
           />
         </ErrorBoundary>

@@ -6,7 +6,7 @@ import { PanelOptionsGroup, Select, Switch } from '@grafana/ui';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 
 // Types
-import { TopologyOptions, TopologyMode, Size, Font, Position } from './types';
+import { TopologyOptions, TopologyMode, Size, Font, Position, Color } from './types';
 
 export class TopologyPanelEditor extends PureComponent<PanelEditorProps<TopologyOptions>> {
   modes: Array<SelectableValue<TopologyMode>> = [{ value: 'JSON', label: 'JSON' }];
@@ -21,6 +21,14 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
     { value: 'Bottom', label: 'Bottom' },
     { value: 'Left', label: 'Left' },
     { value: 'Right', label: 'Right' },
+  ];
+
+  colors: Array<SelectableValue<Color>> = [
+    { value: 'white', label: 'White' },
+    { value: 'black', label: 'Black' },
+    { value: 'red', label: 'Red' },
+    { value: 'green', label: 'Green' },
+    { value: 'blue', label: 'Blue' },
   ];
 
   onModeChange = (item: SelectableValue<TopologyMode>) => this.props.onOptionsChange({ ...this.props.options, mode: item.value! });
@@ -40,8 +48,10 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
 
   onLabelPositionChange = (item: SelectableValue<Position>) => this.props.onOptionsChange({ ...this.props.options, labelPosition: item.value! });
 
+  onLabelColorChange = (item: SelectableValue<Color>) => this.props.onOptionsChange({ ...this.props.options, labelColor: item.value! });
+
   render() {
-    const { mode, content, backgroundImage, colorGradient, labelSize, labelFont, labelPosition } = this.props.options;
+    const { mode, content, backgroundImage, colorGradient, labelSize, labelFont, labelPosition, labelColor } = this.props.options;
 
     return (
       <PanelOptionsGroup title="Text">
@@ -64,6 +74,8 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
           <Select onChange={this.onLabelFontChange} value={this.fonts.find(e => labelFont === e.value)} options={this.fonts} />
           <span className="gf-form-label">Label Position</span>
           <Select onChange={this.onLabelPositionChange} value={this.positions.find(e => labelPosition === e.value)} options={this.positions} />
+          <span className="gf-form-label">Label Color</span>
+          <Select onChange={this.onLabelColorChange} value={this.colors.find(e => labelColor === e.value)} options={this.colors} />
         </div>
 
         <Switch label="Color gradient" checked={colorGradient} onChange={this.onToggleColorGradient} />

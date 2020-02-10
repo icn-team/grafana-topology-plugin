@@ -2,6 +2,7 @@ export type TopologyMode = 'JSON';
 export type Size = 28 | 30 | 32;
 export type Font = 'Verdana';
 export type Position = 'Top' | 'Bottom' | 'Left' | 'Right';
+export type Color = 'white' | 'black' | 'red' | 'green' | 'blue';
 
 export interface TopologyOptions {
   mode: TopologyMode;
@@ -11,6 +12,7 @@ export interface TopologyOptions {
   labelSize: Size;
   labelFont: Font;
   labelPosition: Position;
+  labelColor: Color;
 }
 
 export interface LinkConstants {
@@ -100,4 +102,5 @@ export const defaults: TopologyOptions = {
   labelSize: 30,
   labelFont: 'Verdana',
   labelPosition: 'Left',
+  labelColor: 'white',
 };
