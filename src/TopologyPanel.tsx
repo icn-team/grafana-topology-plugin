@@ -121,10 +121,10 @@ export class TopologyPanel extends PureComponent<Props, State> {
           let label;
 
           if (bw < linkDefaults.bwMid) {
-            color = this.colorScaleLin(bw);
+            color = this.props.options.colorGradient ? this.colorScaleLin(bw) : 'blue';
             width = (linkDefaults.edgeWidthMid * bw) / linkDefaults.bwMid;
           } else {
-            color = this.colorScaleLog(bw);
+            color = this.props.options.colorGradient ? this.colorScaleLog(bw) : 'blue';
             width = linkDefaults.edgeWidthMid + (Math.log10(bw - linkDefaults.bwMid) * (linkDefaults.edgeWidthMax - linkDefaults.edgeWidthMin)) / 4;
           }
 

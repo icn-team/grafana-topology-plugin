@@ -3,6 +3,7 @@ export interface TopologyOptions {
   mode: TopologyMode;
   backgroundImage: string;
   content: string;
+  colorGradient: boolean;
 }
 
 export interface LinkConstants {
@@ -86,6 +87,7 @@ export const defaults: TopologyOptions = {
     ],
     "edges": [
       { "from": 1, "to": 2, "id": "test2" }
-    ]
+    ],
 }`,
+  colorGradient: true,
 };

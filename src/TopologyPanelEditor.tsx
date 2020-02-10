@@ -2,7 +2,7 @@
 import React, { PureComponent, ChangeEvent } from 'react';
 
 // Components
-import { PanelOptionsGroup, Select } from '@grafana/ui';
+import { PanelOptionsGroup, Select, Switch } from '@grafana/ui';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 
 // Types
@@ -20,8 +20,10 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
     this.props.onOptionsChange({ ...this.props.options, content: (evt.target as any).value });
   };
 
+  onToggleColorGradient = () => this.props.onOptionsChange({ ...this.props.options, colorGradient: !this.props.options.colorGradient });
+
   render() {
-    const { mode, content, backgroundImage } = this.props.options;
+    const { mode, content, backgroundImage, colorGradient } = this.props.options;
 
     return (
       <PanelOptionsGroup title="Text">
@@ -36,6 +38,7 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
           </div>
         </div>
         <textarea value={content} onChange={this.onContentChange} className="gf-form-input" rows={10} />
+        <Switch label="Color gradient" checked={colorGradient} onChange={this.onToggleColorGradient} />
       </PanelOptionsGroup>
     );
   }
