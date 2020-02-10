@@ -10,7 +10,7 @@ import { scaleLinear } from 'd3';
 // Vis js
 import Graph from 'react-graph-vis';
 
-interface Props extends PanelProps<TopologyOptions> { }
+interface Props extends PanelProps<TopologyOptions> {}
 
 interface State {
   graph: any;
@@ -82,26 +82,12 @@ export class TopologyPanel extends PureComponent<Props, State> {
     this.updateTopology();
   }
 
-  // printLabels(canvas: CanvasRenderingContext2D) {
-  //   if (this.network) {
-  //     Object.keys(this.network.body.nodes).forEach(key => {
-  //       const label = this.labels.get(key);
-  //       if (label !== undefined) {
-  //         const nodePosition = this.network.getPositions(key);
-  //         canvas.fillStyle = 'white';
-  //         canvas.fillText(label, -canvas.measureText(label).width - 60, nodePosition[key].y + 40);
-  //       }
-  //     });
-  //   }
-  // }
-
   componentDidUpdate(prevProps: Props) {
     // Since any change could be referenced in a template variable,
     // This needs to process everytime (with debounce)
 
     const { data } = this.props;
-    const { content } = this.props.options;
-    const { backgroundImage } = this.props.options;
+    const { content, backgroundImage } = this.props.options;
 
     if (backgroundImage !== prevProps.options.backgroundImage) {
       this.updateBackground(backgroundImage);
@@ -211,7 +197,7 @@ export class TopologyPanel extends PureComponent<Props, State> {
     const { graph } = this.state;
 
     const events = {
-      select: event => { },
+      select: event => {},
     };
 
     return (
@@ -225,12 +211,38 @@ export class TopologyPanel extends PureComponent<Props, State> {
               this.network = nw;
               this.network.on('beforeDrawing', canvas => {
                 Object.keys(this.network.body.nodes).forEach(key => {
+                  const { labelSize, labelFont, labelPosition } = this.props.options;
+
                   const label = this.labels.get(key);
                   if (label !== undefined) {
                     const nodePosition = this.network.getPositions(key);
                     canvas.fillStyle = 'white';
-                    canvas.font = '30px Verdana';
-                    canvas.fillText(label, nodePosition[key].x - canvas.measureText(label).width - 60, nodePosition[key].y + 60);
+                    canvas.font = labelSize + 'px ' + labelFont;
+                    const textHeight: number = parseInt(canvas.font.match(/\d+/), 10);
+                    const textWidth = canvas.measureText(label).width;
+                    const pos: [number, number] = [0, 0];
+                    switch (labelPosition) {
+                      case 'Top':
+                        pos[0] = 0;
+                        pos[1] = -1;
+                        break;
+                      case 'Bottom':
+                        pos[0] = 0;
+                        pos[1] = 1;
+                        break;
+                      case 'Right':
+                        pos[0] = 1;
+                        pos[1] = 0;
+                        break;
+                      case 'Left':
+                        pos[0] = -1;
+                        pos[1] = 0;
+                        break;
+                    }
+
+                    const x: number = nodePosition[key].x - textWidth / 2;
+                    const y: number = nodePosition[key].y + textHeight / 2;
+                    canvas.fillText(label, x + pos[0] * (textWidth / 2 + 60), y + pos[1] * (textHeight + 40));
                   }
                 });
               });
