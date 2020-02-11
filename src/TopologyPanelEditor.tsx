@@ -2,7 +2,7 @@
 import React, { PureComponent, ChangeEvent } from 'react';
 
 // Components
-import { PanelOptionsGroup, Select, Switch } from '@grafana/ui';
+import { PanelOptionsGroup, Select, Switch, ColorPicker } from '@grafana/ui';
 import { PanelEditorProps, SelectableValue } from '@grafana/data';
 
 // Types
@@ -42,6 +42,8 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
 
   onToggleColorGradient = () => this.props.onOptionsChange({ ...this.props.options, colorGradient: !this.props.options.colorGradient });
 
+  onColorChanged = (color: string) => this.props.onOptionsChange({ ...this.props.options, color: color });
+
   onLabelSizeChange = (item: SelectableValue<Size>) => this.props.onOptionsChange({ ...this.props.options, labelSize: item.value! });
 
   onLabelFontChange = (item: SelectableValue<Font>) => this.props.onOptionsChange({ ...this.props.options, labelFont: item.value! });
@@ -51,7 +53,7 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
   onLabelColorChange = (item: SelectableValue<Color>) => this.props.onOptionsChange({ ...this.props.options, labelColor: item.value! });
 
   render() {
-    const { mode, content, backgroundImage, colorGradient, labelSize, labelFont, labelPosition, labelColor } = this.props.options;
+    const { mode, content, backgroundImage, colorGradient, color, labelSize, labelFont, labelPosition, labelColor } = this.props.options;
 
     return (
       <PanelOptionsGroup title="Text">
@@ -78,7 +80,15 @@ export class TopologyPanelEditor extends PureComponent<PanelEditorProps<Topology
           <Select onChange={this.onLabelColorChange} value={this.colors.find(e => labelColor === e.value)} options={this.colors} />
         </div>
 
-        <Switch label="Color gradient" checked={colorGradient} onChange={this.onToggleColorGradient} />
+        <div className="gf-form">
+          <Switch label="Color gradient" checked={colorGradient} onChange={this.onToggleColorGradient} />
+          <span className="gf-form-label">Color:</span>
+          <div className="thresholds-row-input-inner-color-colorpicker">
+            <div className="gf-form-input">
+              <ColorPicker color={color} onChange={this.onColorChanged}></ColorPicker>
+            </div>
+          </div>
+        </div>
       </PanelOptionsGroup>
     );
   }

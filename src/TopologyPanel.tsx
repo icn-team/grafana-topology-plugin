@@ -60,7 +60,7 @@ export class TopologyPanel extends PureComponent<Props, State> {
 
     this.colorScaleLin = scaleLinear<string>()
       .domain([0, 10, 20, 30, 40, 50])
-      .range(['black', 'green', 'blue', 'purple', 'black', 'yellow']);
+      .range(['white', 'green', 'blue', 'purple', 'black', 'yellow']);
     this.colorScaleLog = scaleLinear<string>()
       .domain([50, 200, 1000])
       .range(['yellow', 'orange', 'red']);
@@ -177,10 +177,10 @@ export class TopologyPanel extends PureComponent<Props, State> {
           let label;
 
           if (bw < linkDefaults.bwMid) {
-            color = this.props.options.colorGradient ? this.colorScaleLin(bw) : 'blue';
+            color = this.props.options.colorGradient ? this.colorScaleLin(bw) : bw === 0 ? 'white' : this.props.options.color;
             width = (linkDefaults.edgeWidthMid * bw) / linkDefaults.bwMid;
           } else {
-            color = this.props.options.colorGradient ? this.colorScaleLog(bw) : 'blue';
+            color = this.props.options.colorGradient ? this.colorScaleLog(bw) : bw === 0 ? 'white' : this.props.options.color;
             width = linkDefaults.edgeWidthMid + (Math.log10(bw - linkDefaults.bwMid) * (linkDefaults.edgeWidthMax - linkDefaults.edgeWidthMin)) / 4;
           }
 

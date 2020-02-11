@@ -9,6 +9,7 @@ export interface TopologyOptions {
   backgroundImage: string;
   content: string;
   colorGradient: boolean;
+  color: string;
   labelSize: Size;
   labelFont: Font;
   labelPosition: Position;
@@ -99,6 +100,7 @@ export const defaults: TopologyOptions = {
     ]
 }`,
   colorGradient: true,
+  color: 'white',
   labelSize: 30,
   labelFont: 'Verdana',
   labelPosition: 'Left',
