@@ -169,33 +169,34 @@ export class TopologyPanel extends PureComponent<Props, State> {
 
       Object.keys(this.network.body.edges).forEach(key => {
         let bw = bandwidth.get(key);
-        if (bw !== undefined) {
-          bw = Math.round((bw / 1024 / 1024) * 8 * 10) / 10;
-
-          let color;
-          let width;
-          let label;
-
-          if (bw < linkDefaults.bwMid) {
-            color = this.props.options.colorGradient ? this.colorScaleLin(bw) : bw === 0 ? 'white' : this.props.options.color;
-            width = (linkDefaults.edgeWidthMid * bw) / linkDefaults.bwMid;
-          } else {
-            color = this.props.options.colorGradient ? this.colorScaleLog(bw) : bw === 0 ? 'white' : this.props.options.color;
-            width = linkDefaults.edgeWidthMid + (Math.log10(bw - linkDefaults.bwMid) * (linkDefaults.edgeWidthMax - linkDefaults.edgeWidthMin)) / 4;
-          }
-
-          if (bw !== 0.0) {
-            if (bw > 1000) {
-              label = Math.round(bw / 10) / 100 + ' Gbps';
-            } else {
-              label = bw + ' Mbps';
-            }
-          } else {
-            label = '';
-          }
-
-          this.network.body.data.edges.update({ id: key, color: color, width: width, label: label });
+        if (bw === undefined) {
+          bw = 0;
         }
+        bw = Math.round((bw / 1024 / 1024) * 8 * 10) / 10;
+
+        let color;
+        let width;
+        let label;
+
+        if (bw < linkDefaults.bwMid) {
+          color = this.props.options.colorGradient ? this.colorScaleLin(bw) : bw === 0 ? 'white' : this.props.options.color;
+          width = (linkDefaults.edgeWidthMid * bw) / linkDefaults.bwMid;
+        } else {
+          color = this.props.options.colorGradient ? this.colorScaleLog(bw) : bw === 0 ? 'white' : this.props.options.color;
+          width = linkDefaults.edgeWidthMid + (Math.log10(bw - linkDefaults.bwMid) * (linkDefaults.edgeWidthMax - linkDefaults.edgeWidthMin)) / 4;
+        }
+
+        if (bw !== 0.0) {
+          if (bw > 1000) {
+            label = Math.round(bw / 10) / 100 + ' Gbps';
+          } else {
+            label = bw + ' Mbps';
+          }
+        } else {
+          label = ' ';
+        }
+
+        this.network.body.data.edges.update({ id: key, color: color, width: width, label: label });
       });
     }
 
